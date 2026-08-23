@@ -53,7 +53,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   }
 
   Future<void> loadWeather() async {
-    const apiKey = '3df12ce273dad35fd72b4025a101218a';
+    const apiKey = String.fromEnvironment('OPEN_WEATHER_API_KEY');
 
     setState(() {
       progress = 0.0;
