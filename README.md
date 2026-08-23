@@ -138,23 +138,49 @@ Après la création du compte, accéder à la section consacrée aux clés API.
 
 Une clé API doit être créée afin d'autoriser l'application à effectuer des requêtes vers OpenWeather.
 
-Cette clé permet à l'application d'accéder aux données météorologiques.
+## 3. Sécurisation de la clé (env.json)
 
-## 3. Utilisation de la clé dans l'application
+⚠️ La clé API ne doit **jamais** être écrite directement dans le code source : le dépôt GitHub est public, donc n'importe qui pourrait la récupérer et l'utiliser.
 
-Dans le code de l'application, une clé API est utilisée lors de l'appel au service météo :
+Pour l'éviter, la clé est stockée dans un fichier séparé, ignoré par Git :
 
-```dart
-const apiKey = 'VOTRE_CLE_OPENWEATHER';
+* **`env.json`** *(à créer soi-même, jamais envoyé sur GitHub)* — contient la vraie clé :
+```json
+  {
+    "OPEN_WEATHER_API_KEY": "VOTRE_CLE_OPENWEATHER"
+  }
+```
+* **`env.example.json`** *(présent sur GitHub)* — sert de modèle, sans vraie clé :
+```json
+  {
+    "OPEN_WEATHER_API_KEY": "votre_cle_ici"
+  }
 ```
 
-Il faut remplacer `VOTRE_CLE_OPENWEATHER` par sa propre clé API.
+Le fichier `env.json` est listé dans `.gitignore`, il n'est donc jamais commité.
+
+Dans le code, la clé est lue avec :
+
+```dart
+const apiKey = String.fromEnvironment('OPEN_WEATHER_API_KEY');
+```
+
+## 4. Lancer l'application avec la clé
+
+Au lancement, il faut indiquer à Flutter de lire `env.json` :
+
+```bash
+flutter run -d windows --dart-define-from-file=env.json
+```
+
+Dans Android Studio : **Edit Configurations > Additional run args** →
+`--dart-define-from-file=env.json`
 
 ### ⚠️ Sécurité
 
 **La clé API personnelle ne doit jamais être publiée sur GitHub.**
 
-Le README contient uniquement un exemple et ne doit pas contenir une clé personnelle valide.
+Seul `env.example.json` (sans vraie clé) est présent dans le dépôt. Toute personne qui récupère le projet doit créer son propre `env.json` à partir de ce modèle, avec sa propre clé.
 
 ---
 
@@ -458,11 +484,15 @@ dart run build_runner build --delete-conflicting-outputs
 
 ## 5. Configurer OpenWeather
 
-Ajouter sa propre clé API :
+Créer un fichier `env.json` à la racine du projet (à partir du modèle `env.example.json`), avec sa propre clé API :
 
-```dart
-const apiKey = 'VOTRE_CLE_OPENWEATHER';
+```json
+{
+  "OPEN_WEATHER_API_KEY": "VOTRE_CLE_OPENWEATHER"
+}
 ```
+
+Ce fichier n'est jamais envoyé sur GitHub (voir la section 🔑 Configuration de l'API OpenWeather).
 
 ## 6. Vérifier les appareils disponibles
 
@@ -479,10 +509,10 @@ La cible **Windows** doit apparaître parmi les appareils disponibles.
 Exécuter :
 
 ```bash
-flutter run -d windows
+flutter run -d windows --dart-define-from-file=env.json
 ```
 
-Ou sélectionner **Windows** comme appareil cible directement dans Android Studio.
+Ou, dans Android Studio, sélectionner **Windows** comme appareil cible et ajouter `--dart-define-from-file=env.json` dans **Edit Configurations > Additional run args**.
 
 ---
 
