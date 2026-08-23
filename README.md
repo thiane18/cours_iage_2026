@@ -1,4 +1,6 @@
-# cours_iage_2026
+# 🌤️ Météo Pulse
+
+Application météo Flutter développée dans le cadre de l'examen de Développement Mobile — L3IAGE ISI 2026.
 
 premier projet flutter
 
@@ -57,6 +59,7 @@ L'application possède les fonctionnalités suivantes :
 * 🗺️ Localisation de la ville dans Google Maps
 * ☀️ Mode clair
 * 🌙 Mode sombre
+* 🎨 Interface avec dégradé animé et cartes en verre dépoli (glassmorphism)
 * 🔄 Bouton **« Recommencer »**
 * ⚠️ Gestion des erreurs API
 * 🔁 Bouton **« Réessayer »**
@@ -420,7 +423,7 @@ Le bouton retour permet de revenir à l'écran précédent.
 
 # 📂 Structure du projet
 
-Le projet est organisé de manière à séparer les modèles, les services, les écrans et les widgets.
+Le projet est organisé de manière à séparer les modèles, les services, les écrans, les widgets et les utilitaires.
 
 ```text
 lib/
@@ -439,9 +442,21 @@ lib/
 │   └── weather_detail_screen.dart
 │
 ├── widgets/
-│   └── progress_gauge.dart
+│   ├── progress_gauge.dart
+│   ├── gradient_background.dart
+│   └── glass_card.dart
+│
+├── utils/
+│   └── weather_icons.dart
 │
 └── main.dart
+```
+
+## Fichiers de configuration à la racine
+
+```text
+env.json           → contient la vraie clé API (jamais commité, voir .gitignore)
+env.example.json   → modèle de configuration (commité, sans vraie clé)
 ```
 
 ---
@@ -610,9 +625,9 @@ Ce projet permet de mettre en pratique plusieurs notions de développement Flutt
 
 # 🐙 GitHub
 
-Le projet doit être publié dans un dépôt GitHub.
+Le projet est publié dans un dépôt GitHub public.
 
-Lien du dépôt :
+Lien du dépôt : [github.com/thiane18/cours_iage_2026](https://github.com/thiane18/cours_iage_2026)
 
 
 # 👥 Groupe
