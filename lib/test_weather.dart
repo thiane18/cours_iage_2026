@@ -4,7 +4,7 @@ import 'services/weather_service.dart';
 
 
 Future<void> testWeather() async {
-  const apiKey = '7ab1f7a99d1ed1bdd0d77b9e36c122bf';
+  const apiKey = String.fromEnvironment('OPEN_WEATHER_API_KEY');
 
   final dio = Dio();
 
