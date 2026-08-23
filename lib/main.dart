@@ -35,14 +35,26 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.light,
-        colorSchemeSeed: Colors.blue,
+        colorSchemeSeed: const Color(0xFF2E7BC4),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          foregroundColor: Colors.white,
+          centerTitle: true,
+        ),
       ),
 
       // MODE SOMBRE
       darkTheme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.dark,
-        colorSchemeSeed: Colors.blue,
+        colorSchemeSeed: const Color(0xFF2E7BC4),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          foregroundColor: Colors.white,
+          centerTitle: true,
+        ),
       ),
 
       home: HomeScreen(
