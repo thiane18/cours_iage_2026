@@ -643,6 +643,9 @@ Le projet est publié dans un dépôt GitHub public.
 
 Lien du dépôt : [github.com/thiane18/cours_iage_2026](https://github.com/thiane18/cours_iage_2026)
 
+# 📜 Licence
+
+Ce projet a été développé dans un contexte académique dans le cadre du module de **Développement mobile — Licence 3 IAGE**.
 
 # 👥 Groupe
 
