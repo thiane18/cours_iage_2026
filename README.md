@@ -60,6 +60,11 @@ L'application possède les fonctionnalités suivantes :
 * ☀️ Mode clair
 * 🌙 Mode sombre
 * 🎨 Interface avec dégradé animé et cartes en verre dépoli (glassmorphism)
+* 🌡️ Détails météo enrichis (ressenti, min/max, humidité, pression, visibilité)
+* 🧭 Direction du vent avec boussole visuelle
+* 🌅 Heures de lever/coucher du soleil
+* 🌙 Phase de la lune (calculée localement, sans appel API)
+* 🌧️ Précipitations en temps réel (pluie/neige)
 * 🔄 Bouton **« Recommencer »**
 * ⚠️ Gestion des erreurs API
 * 🔁 Bouton **« Réessayer »**
@@ -433,6 +438,7 @@ lib/
 │
 ├── services/
 │   ├── weather_api.dart
+│   ├── weather_api.g.dart      (généré automatiquement, ne pas modifier)
 │   └── weather_service.dart
 │
 ├── screens/
@@ -444,12 +450,16 @@ lib/
 ├── widgets/
 │   ├── progress_gauge.dart
 │   ├── gradient_background.dart
-│   └── glass_card.dart
+│   ├── glass_card.dart
+│   └── wind_compass.dart
 │
 ├── utils/
-│   └── weather_icons.dart
+│   ├── weather_icons.dart
+│   ├── wind_utils.dart
+│   └── moon_phase.dart
 │
-└── main.dart
+├── main.dart
+└── test_weather.dart      (script de test manuel de l'appel API)
 ```
 
 ## Fichiers de configuration à la racine
