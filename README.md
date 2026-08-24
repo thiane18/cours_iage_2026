@@ -2,34 +2,17 @@
 
 Application météo Flutter développée dans le cadre de l'examen de Développement Mobile — L3IAGE ISI 2026.
 
-premier projet flutter
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
-# 🌤️ Application Météo Flutter
-
 ## 👥 Membres du groupe
 
 Thiane Marie FALL
+
 Rokhaya BOYE
 
 ---
 
 ## 📱 Présentation du projet
 
-Cette application météo a été développée avec Flutter** et Dart.
+Cette application météo a été développée avec **Flutter** et **Dart**.
 
 Elle permet de récupérer et d'afficher les conditions météorologiques de plusieurs villes en temps réel grâce à l'API **OpenWeather**.
 
@@ -86,17 +69,18 @@ L'application récupère les données météorologiques pour les cinq villes sui
 
 # 🛠️ Technologies utilisées
 
-| Technologie         | Utilisation                          |
-| ------------------- | ------------------------------------ |
-| **Flutter**         | Framework de développement           |
-| **Dart**            | Langage de programmation             |
-| **Android Studio**  | Environnement de développement       |
-| **Windows**         | Environnement d'exécution et de test |
-| **Dio**             | Requêtes HTTP                        |
-| **Retrofit**        | Déclaration des appels API           |
-| **OpenWeather API** | Données météorologiques              |
-| **Google Maps**     | Localisation des villes              |
-| **url_launcher**    | Ouverture de Google Maps             |
+| Technologie            | Utilisation                                     |
+| ----------------------- | ------------------------------------------------ |
+| **Flutter**             | Framework de développement                       |
+| **Dart**                | Langage de programmation                          |
+| **Android Studio**      | Environnement de développement                    |
+| **Windows**             | Environnement d'exécution et de test principal    |
+| **Émulateur Android**   | Validation du fonctionnement sur mobile           |
+| **Dio**                 | Requêtes HTTP                                     |
+| **Retrofit**            | Déclaration des appels API                        |
+| **OpenWeather API**     | Données météorologiques                           |
+| **Google Maps**         | Localisation des villes                           |
+| **url_launcher**        | Ouverture de Google Maps                          |
 
 ---
 
@@ -129,6 +113,23 @@ Depuis le terminal d'Android Studio, l'application peut être lancée avec :
 ```bash
 flutter run -d windows
 ```
+
+## 📱 Validation sur émulateur Android
+
+Le développement a été réalisé principalement sur Windows pour plus de rapidité. Avant la remise, l'application a également été testée sur un **émulateur Android** (Pixel 9, Android 17 "CinnamonBun") via le Device Manager d'Android Studio, afin de confirmer son bon fonctionnement en conditions mobiles réelles :
+
+* Affichage correct sur un écran mobile (aucun débordement)
+* Scroll fonctionnel sur les listes et l'écran de détail
+* Dégradé, cartes glassmorphism et animations rendus correctement
+* Navigation et bouton Google Maps opérationnels
+
+Pour lancer l'application sur l'émulateur :
+
+```bash
+flutter run -d emulator-5554 --dart-define-from-file=env.json
+```
+
+Ou, dans Android Studio, sélectionner l'émulateur Android dans le menu de sélection d'appareil, puis cliquer sur ▶.
 
 ---
 
@@ -236,7 +237,7 @@ abstract class WeatherApi {
   }) = _WeatherApi;
 
   @GET('weather')
-  Future<Map<String, dynamic>> getWeather(
+  Future<HttpResponse<dynamic>> getWeather(
     @Query('q') String city,
     @Query('appid') String apiKey,
     @Query('units') String units,
@@ -256,11 +257,11 @@ Les données récupérées depuis l'API sont utilisées pour construire un objet
 Le modèle contient les informations suivantes :
 
 ```text
-city
-temperature
-description
-latitude
-longitude
+city, temperature, description, latitude, longitude
+feelsLike, tempMin, tempMax, humidity
+windSpeed, windDirection, pressure, visibility
+sunrise, sunset
+rainVolume, snowVolume (optionnels, présents uniquement s'il pleut/neige)
 ```
 
 Ces données sont ensuite transmises aux différents écrans de l'application.
@@ -357,11 +358,14 @@ Lorsqu'une ville est sélectionnée, une page de détail affiche ses information
 
 Les informations disponibles sont :
 
-* 🌍 Ville
-* 🌡️ Température
+* 🌍 Ville et température (avec ressenti, min/max)
 * ☁️ Description météo
-* 📍 Latitude
-* 📍 Longitude
+* 🧭 Vent (vitesse, direction, boussole visuelle)
+* 💧 Humidité, pression, visibilité
+* 🌅 Heures de lever et coucher du soleil
+* 🌙 Phase de la lune (calculée localement)
+* 🌧️ Précipitations (pluie/neige)
+* 📍 Latitude et longitude
 
 ---
 
@@ -543,7 +547,7 @@ Ou, dans Android Studio, sélectionner **Windows** comme appareil cible et ajout
 
 # 🧪 Tests réalisés
 
-L'application a été testée sur Windows avec les fonctionnalités suivantes :
+L'application a été testée sur Windows et sur un émulateur Android avec les fonctionnalités suivantes :
 
 * [x] Écran d'accueil
 * [x] Lancement de l'expérience
@@ -658,4 +662,4 @@ Cette application permet de consulter les conditions météorologiques de plusie
 
 Elle combine une API météo, une jauge de progression, la navigation entre plusieurs écrans, la gestion des erreurs, Google Maps ainsi que les modes clair et sombre.
 
-Le projet a été développé avec **Android Studio**, puis exécuté et testé sur **Windows**.
+Le projet a été développé avec **Android Studio**, exécuté principalement sur **Windows**, et validé sur un **émulateur Android** avant la remise finale.
